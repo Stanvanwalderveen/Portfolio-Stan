@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stan van Walderveen – Portfolio</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @keyframes wave {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .hero-bg {
+      background-color: #1f2937;
+      background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%236b7280' fill-opacity='0.1' d='M0,160L60,149.3C120,139,240,117,360,101.3C480,85,600,75,720,85.3C840,96,960,128,1080,154.7C1200,181,1320,203,1380,213.3L1440,224L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-size: cover;
+      animation: wave 40s linear infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <!-- Home / Hero -->
+  <section id="home" class="hero-bg text-white min-h-screen flex flex-col justify-center items-center text-center px-4">
+    <div class="hero-content" data-aos="fade-up">
+      <img src="stan.jpg" alt="Stan van Walderveen" class="w-36 h-36 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-full object-cover shadow-2xl mb-4 border-4 border-white">
+      <div class="flex justify-center mb-2"><i data-lucide="car" class="w-6 h-6 text-white"></i></div>
+      <h1 class="text-4xl font-bold mb-2">Stan van Walderveen</h1>
+      <p class="text-lg max-w-md mb-4">BBL Leerling Autotechnicus met passie voor techniek én mensen. Op zoek naar een plek om te groeien, bouwen en begeleiden.</p>
+      <p class="italic text-sm opacity-80">“Driven to repair, ready to grow.”</p>
+    </div>
+  </section>
+
+  <!-- Navigatie -->
+  <nav class="sticky top-0 bg-white shadow-md py-3 z-50">
+    <div class="flex justify-center space-x-6">
+      <a href="#over" class="text-blue-600 hover:underline">Over mij</a>
+      <a href="#skills" class="text-blue-600 hover:underline">Vaardigheden</a>
+      <a href="#cv" class="text-blue-600 hover:underline">CV</a>
+      <a href="#contact" class="text-blue-600 hover:underline">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Over mij -->
+  <section id="over" class="py-16 px-6 max-w-3xl mx-auto" data-aos="fade-up">
+    <h2 class="text-2xl font-semibold mb-4">Over mij</h2>
+    <p>Ik ben Stan, 22 jaar en BBL-leerling Autotechniek met een achtergrond in de zorg. Ik hou van sleutelen aan voertuigen, maar ook van werken met mensen. Mijn opleiding tot Persoonlijk Begeleider versterkt mijn sociale kant, terwijl ik technisch graag met mijn handen bezig ben. Ik werk zelfstandig, leer snel en ben op zoek naar een plek waar ik beide talenten mag inzetten.</p>
+  </section>
+
+  <!-- Vaardigheden -->
+  <section id="skills" class="py-16 px-6 max-w-3xl mx-auto bg-gray-100" data-aos="fade-up">
+    <h2 class="text-2xl font-semibold mb-4">Vaardigheden</h2>
+    <ul class="list-disc list-inside space-y-2">
+      <li>Technisch inzicht en ervaring met auto-onderhoud</li>
+      <li>Zelfstandig en praktisch ingesteld (DIY-mentaliteit)</li>
+      <li>Sociaal sterk en empathisch</li>
+      <li>Ervaring met jongeren met autisme of verslaving</li>
+      <li>Verantwoordelijk en stressbestendig</li>
+      <li>Leergierig en flexibel inzetbaar</li>
+    </ul>
+  </section>
+
+  <!-- CV -->
+  <section id="cv" class="py-16 px-6 max-w-3xl mx-auto" data-aos="zoom-in">
+    <h2 class="text-2xl font-semibold mb-4">Mijn CV</h2>
+    <p>Download hieronder mijn actuele CV in PDF-formaat:</p>
+    <a href="cv-stan.pdf" download class="inline-block mt-4 bg-blue-600 text-white px-5 py-2 rounded shadow hover:bg-blue-700">Download CV</a>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-16 px-6 max-w-3xl mx-auto bg-gray-100" data-aos="fade-up">
+    <h2 class="text-2xl font-semibold mb-4">Contact</h2>
+    <p>Heb je een vraag of wil je kennismaken? Neem gerust contact op:</p>
+    <p class="mt-4"><strong>Email:</strong> <a href="mailto:Hellostanexplore@protonmail.com" class="text-blue-600">Hellostanexplore@protonmail.com</a></p>
+    <p><strong>Telefoon:</strong> <a href="tel:+31615093766" class="text-blue-600">06 1509 3766</a></p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 bg-gray-800 text-white">
+    &copy; 2025 Stan van Walderveen
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    lucide.createIcons();
+  </script>
+</body>
+</html>
