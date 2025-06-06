@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
@@ -8,11 +8,13 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     @keyframes wave {
       0% { background-position: 0% 50%; }
       100% { background-position: 100% 50%; }
     }
-
     .hero-bg {
       background-color: #1f2937;
       background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%236b7280' fill-opacity='0.1' d='M0,160L60,149.3C120,139,240,117,360,101.3C480,85,600,75,720,85.3C840,96,960,128,1080,154.7C1200,181,1320,203,1380,213.3L1440,224L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
@@ -22,7 +24,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .hero-bg::before {
       content: "";
       position: absolute;
@@ -30,7 +31,6 @@
       background: rgba(0, 0, 0, 0.4);
       z-index: 0;
     }
-
     .hero-content {
       position: relative;
       z-index: 10;
@@ -38,26 +38,80 @@
       flex-direction: column;
       align-items: center;
     }
+    .lang-buttons-absolute {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 50;
+    }
+    .dark-mode {
+      background-color: #111827;
+      color: #f9fafb;
+    }
+    .dark-mode nav {
+      background-color: #1f2937;
+    }
+    .dark-mode section {
+      background-color: #111827;
+    }
+    .lazy-img {
+      filter: blur(10px);
+      transition: filter 0.3s;
+    }
+    .lazy-img.loaded {
+      filter: blur(0);
+    }
+    #backToTop {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      display: none;
+      z-index: 50;
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
-  <!-- Home / Hero -->
+  <button id="toggleDarkMode" class="fixed bottom-5 right-5 z-50 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition">Dark Mode</button>
+
+  <button id="backToTop" class="bg-blue-600 text-white p-3 rounded-full shadow hover:bg-blue-700 transition">
+    ↑
+  </button>
+
+  <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center hidden z-50">
+    <img id="lightbox-img" src="" class="max-h-[90vh] max-w-[90vw] rounded shadow-lg">
+  </div>
+
+ <!-- Hero -->
   <section id="home" class="hero-bg text-white min-h-screen flex flex-col justify-center items-center text-center px-4">
+    <div class="lang-buttons-absolute">
+      <button onclick="switchLang('nl')" class="text-sm font-medium px-3 py-1 rounded-md bg-white bg-opacity-90 hover:bg-blue-600 hover:text-white shadow-md transition-all duration-300 scale-100 hover:scale-105">NL</button>
+      <button onclick="switchLang('en')" class="text-sm font-medium px-3 py-1 rounded-md bg-white bg-opacity-90 hover:bg-blue-600 hover:text-white shadow-md transition-all duration-300 scale-100 hover:scale-105">EN</button>
+    </div>
     <div class="hero-content" data-aos="fade-up">
-      <img src="stan.jpg" alt="Stan van Walderveen" class="w-36 h-36 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-full object-cover shadow-2xl mb-4 border-4 border-white">
+      <img src="stan.jpg" alt="Stan van Walderveen" class="lazy-img w-36 h-36 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-full object-cover shadow-2xl mb-4 border-4 border-white" loading="lazy" onload="this.classList.add('loaded')">
       <div class="flex justify-center mb-2"><i data-lucide="car" class="w-6 h-6 text-white"></i></div>
       <h1 class="text-4xl font-bold mb-2">Stan van Walderveen</h1>
-      <p class="text-lg max-w-md mb-4">BBL Leerling Autotechnicus met passie voor techniek én mensen. Op zoek naar een plek om te groeien, bouwen en begeleiden.</p>
+      <p id="intro" class="text-lg max-w-md mb-4">BBL Leerling Autotechnicus met passie voor techniek én mensen. Op zoek naar een plek om te groeien, bouwen en begeleiden.</p>
       <p class="italic text-sm opacity-80">“Driven to repair, ready to grow.”</p>
     </div>
+<div class="mt-4 z-10 relative">
+  <a href="https://www.linkedin.com/in/stan-van-walderveen-614b9b327/" target="_blank" rel="noopener noreferrer"
+     class="inline-flex items-center text-gray-400 hover:text-gray-600 transition-all">
+    <i data-lucide="linkedin" class="w-5 h-5 mr-2"></i>
+    LinkedIn-profiel
+  </a>
+</div>
+
   </section>
 
   <!-- Navigatie -->
-  <nav class="sticky top-0 bg-white shadow-md py-3 z-50">
+  <nav class="sticky top-0 bg-white shadow-md py-3 z-40">
     <div class="flex justify-center space-x-6">
       <a href="#over" class="text-blue-600 hover:underline">Over mij</a>
       <a href="#skills" class="text-blue-600 hover:underline">Vaardigheden</a>
+      <a href="#ervaring" class="text-blue-600 hover:underline">Ervaring</a>
+      <a href="#hobbys" class="text-blue-600 hover:underline">Hobby's</a>
       <a href="#cv" class="text-blue-600 hover:underline">CV</a>
       <a href="#contact" class="text-blue-600 hover:underline">Contact</a>
     </div>
@@ -66,13 +120,13 @@
   <!-- Over mij -->
   <section id="over" class="py-16 px-6 max-w-3xl mx-auto" data-aos="fade-up">
     <h2 class="text-2xl font-semibold mb-4">Over mij</h2>
-    <p>Ik ben Stan, 22 jaar en BBL-leerling Autotechniek met een achtergrond in de zorg. Ik hou van sleutelen aan voertuigen, maar ook van werken met mensen. Mijn opleiding tot Persoonlijk Begeleider versterkt mijn sociale kant, terwijl ik technisch graag met mijn handen bezig ben. Ik werk zelfstandig, leer snel en ben op zoek naar een plek waar ik beide talenten mag inzetten.</p>
+    <p id="about-text">Ik ben Stan, 22 jaar en BBL-leerling Autotechniek met een achtergrond in de zorg. Ik hou van sleutelen aan voertuigen, maar ook van werken met mensen. Mijn opleiding tot Persoonlijk Begeleider versterkt mijn sociale kant, terwijl ik technisch graag met mijn handen bezig ben. Ik werk zelfstandig, leer snel en ben op zoek naar een plek waar ik beide talenten mag inzetten.</p>
   </section>
 
   <!-- Vaardigheden -->
   <section id="skills" class="py-16 px-6 max-w-3xl mx-auto bg-gray-100" data-aos="fade-up">
     <h2 class="text-2xl font-semibold mb-4">Vaardigheden</h2>
-    <ul class="list-disc list-inside space-y-2">
+    <ul class="list-disc list-inside space-y-2" id="skills-list">
       <li>Technisch inzicht en ervaring met auto-onderhoud</li>
       <li>Zelfstandig en praktisch ingesteld (DIY-mentaliteit)</li>
       <li>Sociaal sterk en empathisch</li>
@@ -82,30 +136,170 @@
     </ul>
   </section>
 
+  <!-- Ervaring -->
+  <section id="ervaring" class="py-16 px-6 max-w-3xl mx-auto" data-aos="fade-up">
+    <h2 class="text-2xl font-semibold mb-4">Ervaring</h2>
+    <div class="border-l-4 border-blue-600 pl-4 space-y-6">
+      <div>
+        <h3 class="text-lg font-semibold">2024 – 2025 | BBL-leerling Persoonlijk Begeleider – SWZ Zorg</h3>
+        <p class="text-sm text-gray-700">Ondersteuning geboden aan cliënten met niet-aangeboren hersenletsel binnen een woonzorginstelling.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold">2022 – heden | PGB Begeleider & Oppas</h3>
+        <p class="text-sm text-gray-700">Begeleiding van twee jonge kinderen met extra zorgbehoeften.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold">2022 – 2024 | Pakketbezorger – Coolblue Eindhoven</h3>
+        <p class="text-sm text-gray-700">Verantwoordelijk voor tijdige bezorging en klantvriendelijke service.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold">2019 – 2022 | Servicebalie & Bezorger – PLUS supermarkt Mierlo</h3>
+        <p class="text-sm text-gray-700">Allround medewerker met focus op klantcontact en logistiek.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hobby's sectie -->
+<section id="hobbys" class="py-16 px-6 max-w-3xl mx-auto bg-gray-100" data-aos="fade-up">
+  <h2 class="text-2xl font-semibold mb-4">Hobby's</h2>
+  <ul class="list-disc list-inside space-y-2 text-gray-700">
+    <li>Fitness en krachttraining</li>
+    <li>DIY-projecten en sleutelen aan mijn auto</li>
+    <li>Avonden met vrienden, borrels en gezelligheid</li>
+    <li>Nieuwe technologie verkennen en toepassen</li>
+    <li>Trainen met mijn hond</li>
+  </ul>
+</section>
+
   <!-- CV -->
   <section id="cv" class="py-16 px-6 max-w-3xl mx-auto" data-aos="zoom-in">
     <h2 class="text-2xl font-semibold mb-4">Mijn CV</h2>
-    <p>Download hieronder mijn actuele CV in PDF-formaat:</p>
-    <a href="cv-stan.pdf" download class="inline-block mt-4 bg-blue-600 text-white px-5 py-2 rounded shadow hover:bg-blue-700">Download CV</a>
+    <p id="cv-text">Download hieronder mijn actuele CV in PDF-formaat:</p>
+    <a href="cv-stan.pdf" download class="inline-block mt-4 bg-blue-600 text-white px-5 py-2 rounded shadow hover:bg-blue-700 transition-all transform hover:scale-105">Download CV</a>
   </section>
 
   <!-- Contact -->
   <section id="contact" class="py-16 px-6 max-w-3xl mx-auto bg-gray-100" data-aos="fade-up">
     <h2 class="text-2xl font-semibold mb-4">Contact</h2>
-    <p>Heb je een vraag of wil je kennismaken? Neem gerust contact op:</p>
-    <p class="mt-4"><strong>Email:</strong> <a href="mailto:Hellostanexplore@protonmail.com" class="text-blue-600">Hellostanexplore@protonmail.com</a></p>
-    <p><strong>Telefoon:</strong> <a href="tel:+31615093766" class="text-blue-600">06 1509 3766</a></p>
+    <p id="contact-text">Heb je een vraag of wil je kennismaken? Neem gerust contact op via onderstaand formulier of direct via onderstaande gegevens:</p>
+<div class="mt-6 mb-6 p-4 border border-blue-200 bg-white rounded shadow-sm text-gray-500">
+  <p class="flex items-center mb-2">
+    <i data-lucide="mail" class="w-5 h-5 mr-2 text-gray-500"></i>
+    <a href="mailto:Hellostanexplore@protonmail.com" class="hover:underline">Hellostanexplore@protonmail.com</a>
+  </p>
+  <p class="flex items-center mb-2">
+    <i data-lucide="linkedin" class="w-5 h-5 mr-2 text-gray-500"></i>
+    <a href="https://www.linkedin.com/in/stan-van-walderveen-614b9b327/" target="_blank" class="hover:underline">LinkedIn – Stan van Walderveen</a>
+  </p>
+  <p class="flex items-center">
+    <i data-lucide="phone" class="w-5 h-5 mr-2 text-gray-500"></i>
+    <a href="tel:+31615093766" class="hover:underline">06 1509 3766</a>
+  </p>
+</div>
+    <form action="https://formspree.io/f/mrbkekdb" method="POST" class="space-y-4">
+      <input type="text" name="name" placeholder="Naam" required class="w-full border border-gray-300 px-4 py-2 rounded">
+      <input type="email" name="email" placeholder="Email" required class="w-full border border-gray-300 px-4 py-2 rounded">
+      <textarea name="message" rows="4" placeholder="Bericht" required class="w-full border border-gray-300 px-4 py-2 rounded"></textarea>
+      <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400">Verzend</button>
+    </form>
   </section>
 
   <!-- Footer -->
   <footer class="text-center py-6 bg-gray-800 text-white">
     &copy; 2025 Stan van Walderveen
   </footer>
+<button id="backToTop" onclick="scrollToTop()" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition-all">Terug naar boven</button>
+<button id="backToTop"
+        onclick="scrollToTop()"
+        class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition-all fixed bottom-5 left-5 z-50 hidden">
+  Terug naar boven
+</button>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
     lucide.createIcons();
+
+    function switchLang(lang) {
+      const translations = {
+        en: {
+          intro: "BBL Automotive Technician Apprentice with a passion for mechanics and people. Looking for a place to grow, build and support.",
+          about: "I’m Stan, 22 years old and a BBL Automotive Technician student with a background in care. I love working on vehicles and helping people. My education as a personal support worker strengthens my social side, while I enjoy being hands-on with technology. I’m independent, quick to learn and looking for a place to apply both skillsets.",
+          skills: [
+            "Technical knowledge and experience with vehicle maintenance",
+            "Independent and practical mindset (DIY attitude)",
+            "Strong social skills and empathy",
+            "Experience with youth with autism or addiction",
+            "Responsible and stress-resistant",
+            "Eager to learn and flexible"
+          ],
+          cv: "Download my current CV in PDF format:",
+          contact: "Do you have a question or want to get in touch? Feel free to contact me via the form below or reach out directly:"
+        },
+        nl: {
+          intro: "BBL Leerling Autotechnicus met passie voor techniek én mensen. Op zoek naar een plek om te groeien, bouwen en begeleiden.",
+          about: "Ik ben Stan, 22 jaar en BBL-leerling Autotechniek met een achtergrond in de zorg. Ik hou van sleutelen aan voertuigen, maar ook van werken met mensen. Mijn opleiding tot Persoonlijk Begeleider versterkt mijn sociale kant, terwijl ik technisch graag met mijn handen bezig ben. Ik werk zelfstandig, leer snel en ben op zoek naar een plek waar ik beide talenten mag inzetten.",
+          skills: [
+            "Technisch inzicht en ervaring met auto-onderhoud",
+            "Zelfstandig en praktisch ingesteld (DIY-mentaliteit)",
+            "Sociaal sterk en empathisch",
+            "Ervaring met jongeren met autisme of verslaving",
+            "Verantwoordelijk en stressbestendig",
+            "Leergierig en flexibel inzetbaar"
+          ],
+          cv: "Download hieronder mijn actuele CV in PDF-formaat:",
+          contact: "Heb je een vraag of wil je kennismaken? Neem gerust contact op via onderstaand formulier of direct via onderstaande gegevens:"
+        }
+      };
+window.addEventListener('scroll', () => {
+  const button = document.getElementById('backToTop');
+  if (window.scrollY > 300) {
+    button.classList.remove('hidden');
+  } else {
+    button.classList.add('hidden');
+  }
+});
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    img.src = src;
+    lightbox.style.display = 'flex';
+  }
+
+  document.getElementById('lightbox').addEventListener('click', () => {
+    document.getElementById('lightbox').style.display = 'none';
+  });
+      const t = translations[lang];
+      document.getElementById("intro").textContent = t.intro;
+      document.getElementById("about-text").textContent = t.about;
+      document.getElementById("cv-text").textContent = t.cv;
+      document.getElementById("contact-text").textContent = t.contact;
+
+      const skillsList = document.getElementById("skills-list");
+      skillsList.innerHTML = "";
+      t.skills.forEach(skill => {
+        const li = document.createElement("li");
+        li.textContent = skill;
+        li.className = "list-disc list-inside";
+        skillsList.appendChild(li);
+      });
+    }
+
+    document.getElementById('toggleDarkMode').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+    
+  </script>
+  
+</body>
+</html>
+
   </script>
 </body>
 </html>
+
