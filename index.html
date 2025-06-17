@@ -44,16 +44,7 @@
       right: 1rem;
       z-index: 50;
     }
-    .dark-mode {
-      background-color: #111827;
-      color: #f9fafb;
-    }
-    .dark-mode nav {
-      background-color: #1f2937;
-    }
-    .dark-mode section {
-      background-color: #111827;
-    }
+
     .lazy-img {
       filter: blur(10px);
       transition: filter 0.3s;
@@ -72,7 +63,6 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
-  <button id="toggleDarkMode" class="fixed bottom-5 right-5 z-50 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition">Dark Mode</button>
 
   <button id="backToTop" class="bg-blue-600 text-white p-3 rounded-full shadow hover:bg-blue-700 transition">
     ↑
@@ -105,17 +95,23 @@
 
   </section>
 
-  <!-- Navigatie -->
-  <nav class="sticky top-0 bg-white shadow-md py-3 z-40">
-    <div class="flex justify-center space-x-6">
-      <a href="#over" class="text-blue-600 hover:underline">Over mij</a>
-      <a href="#skills" class="text-blue-600 hover:underline">Vaardigheden</a>
-      <a href="#ervaring" class="text-blue-600 hover:underline">Ervaring</a>
-      <a href="#hobbys" class="text-blue-600 hover:underline">Hobby's</a>
-      <a href="#cv" class="text-blue-600 hover:underline">CV</a>
-      <a href="#contact" class="text-blue-600 hover:underline">Contact</a>
+ <!-- Navigatie -->
+<nav class="bg-white shadow-md sticky top-0 z-40">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="flex justify-between items-center py-4">
+      <div class="flex flex-wrap justify-center space-x-4 items-center w-full py-2">
+
+        <a href="#over" class="text-blue-600 hover:underline">Over mij</a>
+        <a href="#skills" class="text-blue-600 hover:underline">Vaardigheden</a>
+        <a href="#ervaring" class="text-blue-600 hover:underline">Ervaring</a>
+        <a href="#hobbys" class="text-blue-600 hover:underline">Hobby's</a>
+        <a href="#cv" class="text-blue-600 hover:underline">CV</a>
+        <a href="#contact" class="text-blue-600 hover:underline">Contact</a>
+      </div>
     </div>
-  </nav>
+
+  </div>
+</nav>
 
   <!-- Over mij -->
   <section id="over" class="py-16 px-6 max-w-3xl mx-auto" data-aos="fade-up">
@@ -217,6 +213,8 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+
+
     AOS.init();
     lucide.createIcons();
 
@@ -290,16 +288,10 @@ window.addEventListener('scroll', () => {
       });
     }
 
-    document.getElementById('toggleDarkMode').addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-    });
+
     
   </script>
   
-</body>
-</html>
-
-  </script>
 </body>
 </html>
 
